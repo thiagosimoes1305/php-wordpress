@@ -6,13 +6,13 @@
  * retorno_gerar_cpt('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
  *
  * @param String 	$nome: 		 Passando o nome do CTP
- * @param String 	$post_type:  Tipo do Post Type
+ * @param String 	$post_type:      Tipo do Post Type
  * @param Integer 	$posicao: 	 Posição do CTP no Menu do WordPress
  * @param Array 	$tipo: 		 Array com os tipos de campo para mostrar
  * @param Boolean 	$mostrar:  	 Mostrar o CPT no menu (true/false) por padrão "true"
  * @param Boolean 	$cat:  		 Ativando a catergoria (taxonomy) no CTP.
- * @param String 	$cat_nome:   Apesar do padrão ser um Boleano (falso) caso ative a categoria você pode
- 								 passar um nome para ela, caso nao deseje ativa o nome padrão "Categoria."
+ * @param String 	$cat_nome:       Apesar do padrão ser um Boleano (falso) caso ative a categoria você pode
+ 					 passar um nome para ela, caso nao deseje ativa o nome padrão "Categoria."
  * @return true
  */
 function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat = false, $cat_nome = false){
