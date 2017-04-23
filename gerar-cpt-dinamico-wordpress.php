@@ -1,8 +1,10 @@
+<?php
 /**
  * 
  * Gerando um CPT dinamicamente.
  * Forma criada para melhor geração de CPT.
  * Exemplo de uso:
+ * Funciona na versão 7.0+ do PHP
  * retorno_gerar_cpt('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
  *
  * @param String 	$nome: 		 Passando o nome do CTP
@@ -74,3 +76,5 @@ function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, 
 
 	}
 }
+
+?>

@@ -75,6 +75,7 @@ function retorno_url_thumbnail($post_ID, $thumb){
  * 
  * Gerando um CPT dinamicamente.
  * Forma criada para melhor geração de CPT.
+ * Funciona na versão 7.0+ do PHP
  * Exemplo de uso:
  * retorno_gerar_cpt('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
  *
@@ -160,7 +161,27 @@ function remove_thumbnail_dimensions($html, $post_id, $post_image_id){
 
 
 /**
+ * Customizando a marca no login do WordPress.
+ */
+//add_action('login_enqueue_scripts', 'my_login_logo');
+function my_login_logo(){
+?>
+<style type="text/css">
+    body.login div#login h1 a {
+        background-image: url(<?php echo get_bloginfo('template_url') ?>/global/imgs/marca-topo.png);
+        width: 232px !important;
+		height: 60px !important;
+        background-size: 94% !important;
+        background-position: 4px 4px !important;
+    }
+</style>
+<?php
+}
+
+
+/**
  * Removendo Menus descessários ao cliente.
+ * Só é mostrado para o Administrador
  */
 add_action('admin_menu', 'removendo_links_do_menu', 999);
 function removendo_links_do_menu(){
@@ -189,7 +210,7 @@ function custom_dashboard_widgetALC(){
 			});
 		</script>
 		<p>Ao lado segue o menu com as principais funcionalidades do seu Site.</p>
-		<p>Tema TCA - 50 Anos.</p>';
+		<p>Tema Principal.</p>';
 }
 
 function add_custom_dashboard_widgetALC(){
@@ -213,20 +234,20 @@ function cortar_texto($texto, $limite){
  * @param não passa parâmetro
  * @return retorna as configurações para o Menu.
  */
-add_action('admin_menu', 'register_custom_menu_page');
+//add_action('admin_menu', 'register_custom_menu_page');
 function register_custom_menu_page(){
 
 	// Home
-	add_menu_page('Home', 'Home', 'edit_posts', '#home', '', '', 16);
+	//add_menu_page('Home', 'Home', 'edit_posts', '#home', '', '', 16);
 		//add_submenu_page('#home', 'Redes Sociais', '<a href="post.php?post=64&action=edit">Redes Sociais</a>', 1, '', 'mm');
 		//add_submenu_page('#home', 'Banner da Home', '<a href="edit.php?post_type=banner-home">Banner da Home</a>', 1, '', 'mm');
 		//add_submenu_page('#home', 'Slide da Home', '<a href="edit.php?post_type=slide-home">Slide da Home</a>', 1, '', 'mm');
 
 	// Apresentação
-	add_menu_page('Apresentação', 'Apresentação', 'edit_posts', 'post.php?post=9&action=edit', '', '', 22);
+	//add_menu_page('Apresentação', 'Apresentação', 'edit_posts', 'post.php?post=9&action=edit', '', '', 22);
 
 	// Rodapé
-	add_menu_page('Rodapé', 'Rodapé', 'edit_posts', 'post.php?post=14&action=edit', '', '', 26);
+	//add_menu_page('Rodapé', 'Rodapé', 'edit_posts', 'post.php?post=14&action=edit', '', '', 26);
 }
 
 
@@ -237,7 +258,7 @@ function register_custom_menu_page(){
  * @param não passa parâmetro
  * @return limpa usando jQuery e CSS as saídas.
  */
-add_action('admin_footer', 'wpse_76048_script');
+//add_action('admin_footer', 'wpse_76048_script');
 function wpse_76048_script(){
 ?>
 <style type="text/css">
