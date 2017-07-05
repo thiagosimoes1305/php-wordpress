@@ -3,18 +3,18 @@
  * 
  * Gerando um CPT dinamicamente.
  * Forma criada para melhor geração de CPT.
- * Exemplo de uso:
  * Funciona na versão 7.0+ do PHP
+ * Exemplo de uso:
  * retorno_gerar_cpt('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
  *
  * @param String 	$nome: 		 Passando o nome do CTP
- * @param String 	$post_type:      Tipo do Post Type
+ * @param String 	$post_type:  Tipo do Post Type
  * @param Integer 	$posicao: 	 Posição do CTP no Menu do WordPress
  * @param Array 	$tipo: 		 Array com os tipos de campo para mostrar
  * @param Boolean 	$mostrar:  	 Mostrar o CPT no menu (true/false) por padrão "true"
  * @param Boolean 	$cat:  		 Ativando a catergoria (taxonomy) no CTP.
- * @param String 	$cat_nome:       Apesar do padrão ser um Boleano (falso) caso ative a categoria você pode
- 					 passar um nome para ela, caso nao deseje ativa o nome padrão "Categoria."
+ * @param String 	$cat_nome:   Apesar do padrão ser um Boleano (falso) caso ative a categoria você pode
+ 								 passar um nome para ela, caso nao deseje ativa o nome padrão "Categoria."
  * @return true
  */
 function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat = false, $cat_nome = false){
@@ -33,7 +33,6 @@ function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, 
 			'parent_item_colon' => _x('Parent:', $post_type),
 			'menu_name' => _x($nome, $post_type)
 		);
-
 		$args = array( 
 			'labels' => $labels,
 			'hierarchical' => false,        
@@ -50,11 +49,9 @@ function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, 
 			'capability_type' => 'post',
 			'menu_position' => $posicao
 		);
-
 		register_post_type($post_type, $args);
 		flush_rewrite_rules();
 	});
-
 	if ($cat){
 		$novo_nome = str_replace('-', '_', $post_type);
 		register_taxonomy('cat-'.$post_type, $post_type, 
@@ -65,16 +62,12 @@ function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, 
 		        'hierarchical' => true
 			)
 		);
-
 		add_filter('manage_taxonomies_for_'.$novo_nome.'_columns', $novo_nome.'_type_columns');
 		${$novo_nome.'_type_columns'} = function($taxonomies){
 			$taxonomies[] = 'cat-'.$post_type;
 			return $taxonomies;
 		};
-
 		${$novo_nome.'_type_columns'}($taxonomies);
-
 	}
 }
-
 ?>
