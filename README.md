@@ -4,15 +4,15 @@
 
 [![Build Status](https://img.shields.io/badge/php-wordpress-green)](https://github.com/zeit/next.js) &nbsp;
 
-### Custom Post Type Generation:
+# Custom Post Type Generation:
 Dynamically create CPTs with this script without plugin!
 [Insert the code inside the functions.php file:](https://github.com/tedktedk/repositorio-php-wordpress/blob/master/dynamic-cpt.php)
 
-### Remove view links of menu except administrator
+# Remove view links of menu except administrator
 Removing links on menu but except administrator view
 [Insert the code inside the functions.php file:](https://github.com/tedktedk/repositorio-php-wordpress/blob/master/block-admin-menu.php)
 
-### Show admin bar false
+# Show admin bar false
 Remove top bar showing when user login
 [Insert the code inside the functions.php file:](https://github.com/tedktedk/repositorio-php-wordpress/blob/master/remove-wordpress-sidebar-front-end.php)
 
