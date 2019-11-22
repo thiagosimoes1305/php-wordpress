@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Dinamic CPT Generator.
+ * Dynamic CPT Generator.
  * Form created for better CPT generation.
  * PHP Version 7.0+
  * Example:
