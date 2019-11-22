@@ -4,6 +4,7 @@
  * Dynamic CPT Generator.
  * Form created for better CPT generation.
  * PHP Version 7.0+
+ * Author: Ted k': contato@tedk.com.br
  * Example:
  * cpt_generator('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
  *
