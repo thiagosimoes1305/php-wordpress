@@ -1,24 +1,25 @@
 <?php
 /**
- * 
- * Dynamic CPT Generator.
- * Form created for better CPT generation.
- * PHP Version 7.0+
- * Author: Ted k': contato@tedk.com.br
- * Example:
- * cpt_generator('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
  *
- * @param String 	$nome: 	    CPT Name
- * @param String 	$post_type: Post Type
- * @param Integer 	$posicao:   CTP position in WordPress Menu
- * @param Array 	$tipo: 	    Array type fileds (array('title', 'thumbnail', 'editor', 'excerpt'))
- * @param Boolean 	$mostrar:   Show CPT in Menu. Default "true"
- * @param Boolean 	$cat:  	    Active category (taxonomy) in CTP.
- * @param String 	$cat_nome:  Although the default is Boolean (false) if you enable the category you can give it a name if you do not want to enable the default name "Category."
+ * Gerando um CPT dinamicamente.
+ * Version: 1.0.1
+ * Forma criada para melhor geração de CPT.
+ * Funciona na versão 7.0+ do PHP
+ * Exemplo de uso:
+ * retorno_gerar_cpt('Linha do Tempo', 'linha-do-tempo', 23, array('title', 'thumbnail', 'editor', 'excerpt'), true, true, 'Anos');
+ *
+ * @param String 	$nome: 		 Passando o nome do CTP
+ * @param String 	$post_type:  Tipo do Post Type
+ * @param Integer 	$posicao: 	 Posição do CTP no Menu do WordPress
+ * @param Array 	$tipo: 		 Array com os tipos de campo para mostrar
+ * @param Boolean 	$mostrar:  	 Mostrar o CPT no menu (true/false) por padrão "true"
+ * @param Boolean 	$cat:  		 Ativando a catergoria (taxonomy) no CTP.
+ * @param String 	$cat_nome:   Apesar do padrão ser um Boleano (falso) caso ative a categoria você pode
+ *								 passar um nome para ela, caso nao deseje ativa o nome padrão "Categoria."
  * @return true
  */
-function cpt_generator($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat = false, $cat_nome = false){
-	add_action('init', function() use ($nome, $post_type, $posicao, $tipo, $mostrar, $cat, $cat_nome){
+function retorno_gerar_cpt($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat = false, $cat_nome = false, $hierarchical = false){
+	add_action('init', function() use ($nome, $post_type, $posicao, $tipo, $mostrar, $cat, $cat_nome, $hierarchical){
 		$labels = array(
 			'name' => _x($nome, $post_type),
 			'singular_name' => _x($nome, $post_type),
@@ -36,7 +37,7 @@ function cpt_generator($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat
 
 		$args = array(
 			'labels' => $labels,
-			'hierarchical' => false,
+			'hierarchical' => $hierarchical,
 			'supports' => $tipo,
 			'public' => true,
 			'show_ui' => true,
@@ -44,6 +45,7 @@ function cpt_generator($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat
 			'show_in_nav_menus' => true,
 			'publicly_queryable' => true,
 			'exclude_from_search' => false,
+			'show_in_rest' => true,
 			'has_archive' => true,
 			'query_var' => true,
 			'can_export' => true,
@@ -57,18 +59,18 @@ function cpt_generator($nome, $post_type, $posicao, $tipo, $mostrar = true, $cat
 
 	if ($cat){
 		$novo_nome = str_replace('-', '_', $post_type);
-		register_taxonomy('cat-'.$post_type, $post_type,
+		register_taxonomy('cat_'.$post_type, $post_type,
 			array(
-		      	'label' => ($cat_nome == false) ? 'Categorias' : $cat_nome,
-		        'singular_label' => ($cat_nome == false) ? 'Categorias' : $cat_nome,
-		        'rewrite' => true,
-		        'hierarchical' => true
+				'label' => ($cat_nome == false) ? 'Categorias' : $cat_nome,
+				'singular_label' => ($cat_nome == false) ? 'Categorias' : $cat_nome,
+				'rewrite' => true,
+				'hierarchical' => true
 			)
 		);
 
 		add_filter('manage_taxonomies_for_'.$novo_nome.'_columns', $novo_nome.'_type_columns');
 		${$novo_nome.'_type_columns'} = function($taxonomies){
-			$taxonomies[] = 'cat-'.$post_type;
+			$taxonomies[] = 'cat_'.$post_type;
 			return $taxonomies;
 		};
 
